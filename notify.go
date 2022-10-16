@@ -21,6 +21,11 @@ package notify
 
 var defaultTree = newTree()
 
+// New Create tree
+func New() Tree {
+	return newTree()
+}
+
 // Watch sets up a watchpoint on path listening for events given by the events
 // argument.
 //

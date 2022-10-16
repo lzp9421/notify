@@ -6,13 +6,13 @@ package notify
 
 const buffer = 128
 
-type tree interface {
+type Tree interface {
 	Watch(string, chan<- EventInfo, ...Event) error
 	Stop(chan<- EventInfo)
 	Close() error
 }
 
-func newTree() tree {
+func newTree() Tree {
 	c := make(chan EventInfo, buffer)
 	w := newWatcher(c)
 	if rw, ok := w.(recursiveWatcher); ok {

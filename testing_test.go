@@ -674,7 +674,7 @@ type N struct {
 	Timeout time.Duration
 
 	t    *testing.T
-	tree tree
+	tree Tree
 	w    *W
 	spy  *Spy
 	c    chan EventInfo
