@@ -180,9 +180,13 @@ func (nd node) WalkPath(name string, fn walkPathFunc) error {
 		default:
 			return err
 		}
-		if nd, ok = nd.Child[name[i:i+j]]; !ok {
-			return errnotexist(name[:i+j])
+		var snd node
+		if snd, ok = nd.Child[name[i:i+j]]; !ok {
+			if snd, ok = nd.Child[""]; !ok {
+				return errnotexist(name[:i+j])
+			}
 		}
+		nd = snd
 		i += j + 1
 	}
 	switch err := fn(nd, false); err {
@@ -192,9 +196,14 @@ func (nd node) WalkPath(name string, fn walkPathFunc) error {
 	default:
 		return err
 	}
-	if nd, ok = nd.Child[name[i:]]; !ok {
-		return errnotexist(name)
+	var snd node
+	if snd, ok = nd.Child[name[i:]]; !ok {
+		if snd, ok = nd.Child[""]; !ok {
+			return errnotexist(name)
+		}
 	}
+	nd = snd
+
 	switch err := fn(nd, true); err {
 	case nil, errSkip:
 		return nil
