@@ -2,6 +2,7 @@
 // Use of this source code is governed by the MIT license that can be
 // found in the LICENSE file.
 
+//go:build windows
 // +build windows
 
 package notify
@@ -104,9 +105,9 @@ type event struct {
 
 func (e *event) Event() Event     { return e.e }
 func (e *event) Path() string     { return filepath.Join(syscall.UTF16ToString(e.pathw), e.name) }
-func (e *event) Sys() interface{} { return e.ftype }
+func (e *event) Sys() interface{} { return e.action }
 
-func (e *event) isDir() (bool, error) {
+func (e *event) IsDir() (bool, error) {
 	if e.ftype != fTypeUnknown {
 		return e.ftype == fTypeDirectory, nil
 	}

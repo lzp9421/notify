@@ -602,7 +602,7 @@ func (c *Call) Event() Event         { return c.E }
 func (c *Call) Path() string         { return c.P }
 func (c *Call) String() string       { return fmt.Sprintf("%#v", c) }
 func (c *Call) Sys() interface{}     { return c.S }
-func (c *Call) isDir() (bool, error) { return c.Dir, nil }
+func (c *Call) IsDir() (bool, error) { return c.Dir, nil }
 
 // CallSlice is a convenient wrapper for a slice of Call values, which allows
 // to sort them in ascending order.

@@ -2,6 +2,7 @@
 // Use of this source code is governed by the MIT license that can be
 // found in the LICENSE file.
 
+//go:build (darwin && kqueue) || (darwin && !cgo) || dragonfly || freebsd || netbsd || openbsd || solaris || illumos
 // +build darwin,kqueue darwin,!cgo dragonfly freebsd netbsd openbsd solaris illumos
 
 package notify
@@ -19,4 +20,4 @@ func (e *event) Path() string { return e.p }
 
 func (e *event) Sys() interface{} { return e.pe }
 
-func (e *event) isDir() (bool, error) { return e.d, nil }
+func (e *event) IsDir() (bool, error) { return e.d, nil }

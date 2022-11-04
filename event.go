@@ -109,14 +109,10 @@ type EventInfo interface {
 	Event() Event     // event value for the filesystem action
 	Path() string     // real path of the file or directory
 	Sys() interface{} // underlying data source (can return nil)
-}
-
-type isDirer interface {
-	isDir() (bool, error)
+	IsDir() (bool, error)
 }
 
 var _ fmt.Stringer = (*event)(nil)
-var _ isDirer = (*event)(nil)
 
 // String implements fmt.Stringer interface.
 func (e *event) String() string {

@@ -68,7 +68,7 @@ func (t *nonrecursiveTree) dispatch(c <-chan EventInfo) {
 			if !isrec || ei.Event()&(Create|Remove) == 0 {
 				return
 			}
-			if ok, err := ei.(isDirer).isDir(); !ok || err != nil {
+			if ok, err := ei.IsDir(); !ok || err != nil {
 				return
 			}
 			t.rec <- ei
